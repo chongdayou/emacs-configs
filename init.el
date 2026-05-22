@@ -35,7 +35,7 @@
 ;; Use yaml-mode for .yml and .yaml files
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
 ;; sh-mode for .env files
-(add-to-list 'auto-mode-alist '(".env\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
 ;; central storage for backup files
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
@@ -56,4 +56,8 @@
 ;; Answer with 'y/n' instead of typing 'yes/no'
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-
+;; changes for MacOS
+(when (eq system-type 'darwin)
+  (global-set-key (kbd "M-DEL") 'kill-word)
+  (setq mac-option-modifier 'meta)
+  (setq mac-command-modifier 'super))
