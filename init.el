@@ -1,63 +1,100 @@
+;; ============================================================
+;; Package Management
+;; ============================================================
+
+(require 'package)
+
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/")
+             t)
+
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+
+;; ============================================================
+;; Packages
+;; ============================================================
+
+(use-package dockerfile-mode
+  :mode "Dockerfile\\'")
+
+(use-package yaml-mode
+  :mode "\\.ya?ml\\'")
+
+(use-package company
+  :hook (after-init . global-company-mode)
+  :config
+  (setq company-idle-delay 0.2)
+  (setq company-minimum-prefix-length 2)
+  (setq company-selection-wrap-around t))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
+
+;; ============================================================
+;; File Type Associations
+;; ============================================================
+
+(add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
+
+
+;; ============================================================
+;; macOS Key Behavior
+;; ============================================================
+
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'meta)
+  (setq mac-command-modifier 'super)
+
+  ;; Option + Delete deletes next word
+  (global-set-key (kbd "M-DEL") 'kill-word))
+
+
+;; ============================================================
+;; Editing Defaults
+;; ============================================================
+
+(setq backup-directory-alist
+      `(("." . "~/.emacs.d/backups")))
+
+(global-display-line-numbers-mode 1)
+(setq-default display-line-numbers-width 3)
+
+(global-font-lock-mode 1)
+(show-paren-mode 1)
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+
+;; ============================================================
+;; Custom Variables
+;; ============================================================
+;; Keep this section at the bottom.
+;; Emacs may edit it automatically through Customize.
+;; ============================================================
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
- '(package-selected-packages '(yaml-mode dockerfile-mode)))
+ '(package-selected-packages nil))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; ============================================================
-;; Package Management
-;; ============================================================
-;; Initialize Package Manager
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-
-;; Install Docker and YAML mode
-(unless (package-installed-p 'dockerfile-mode)
-  (package-refresh-contents)
-  (package-install 'dockerfile-mode))
-(unless (package-installed-p 'yaml-mode)
-  (package-install 'yaml-mode))
-
-;; ============================================================
-;; Custom Configurations
-;; ============================================================
-;; Use dockerfile-mode for files named Dockerfile
-(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
-;; Use yaml-mode for .yml and .yaml files
-(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
-;; sh-mode for .env files
-(add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
-
-;; central storage for backup files
-(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
-;; Better line numbers for coding
-(global-display-line-numbers-mode 1)
-;; Keeps the line number gutter stable
-(setq-default display-line-numbers-width 3)
-;; Show syntax highlighting
-(global-font-lock-mode 1)
-
-;; Highlight matching parentheses
-(show-paren-mode 1)
-
-;; Use spaces instead of tabs (4 spaces)
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-
-;; Answer with 'y/n' instead of typing 'yes/no'
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; changes for MacOS
-(when (eq system-type 'darwin)
-  (global-set-key (kbd "M-DEL") 'kill-word)
-  (setq mac-option-modifier 'meta)
-  (setq mac-command-modifier 'super))
