@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emacs Controls Cheat Sheet</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f8;
+      --card: #ffffff;
+      --text: #1f2328;
+      --muted: #57606a;
+      --border: #d8dee4;
+      --code: #f6f8fa;
+      --accent: #0969da;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --card: #161b22;
+        --text: #e6edf3;
+        --muted: #8b949e;
+        --border: #30363d;
+        --code: #0d1117;
+        --accent: #58a6ff;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 32px auto;
+      padding: 0 20px 48px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin: 0 0 8px;
+      letter-spacing: -0.03em;
+    }
+    h2 {
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      font-size: 1.35rem;
+    }
+    p, li { color: var(--muted); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: table;
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: color-mix(in srgb, var(--card), var(--accent) 8%);
+      color: var(--text);
+      font-weight: 650;
+    }
+    tr:last-child td { border-bottom: none; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: var(--code);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.12em 0.35em;
+      color: var(--text);
+    }
+    pre {
+      background: var(--code);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      overflow-x: auto;
+    }
+    pre code {
+      border: 0;
+      padding: 0;
+      background: transparent;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    @media print {
+      body { background: white; }
+      main { margin: 0; max-width: none; }
+      .card { box-shadow: none; border: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="card">
+<h1>Emacs Controls Cheat Sheet</h1>
+<p>This cheat sheet matches your current <code>init.el</code> setup on macOS.</p>
+<h2>Modifier Keys</h2>
+<table><thead><tr><th>Physical Key</th><th>Emacs Meaning</th></tr></thead><tbody><tr><td>Control</td><td>C-</td></tr><tr><td>Option</td><td>M- / Meta / Alt</td></tr><tr><td>Command</td><td>s- / Super</td></tr></tbody></table>
+<h2>Movement</h2>
+<table><thead><tr><th>Physical Keys</th><th>Emacs Command</th><th>Action</th></tr></thead><tbody><tr><td>Ctrl+f</td><td>C-f</td><td>Move forward one character</td></tr><tr><td>Ctrl+b</td><td>C-b</td><td>Move backward one character</td></tr><tr><td>Ctrl+n</td><td>C-n</td><td>Move down / next line</td></tr><tr><td>Ctrl+p</td><td>C-p</td><td>Move up / previous line</td></tr><tr><td>Option+f</td><td>M-f</td><td>Move forward one word</td></tr><tr><td>Option+b</td><td>M-b</td><td>Move backward one word</td></tr><tr><td>Ctrl+a</td><td>C-a</td><td>Move to beginning of line</td></tr><tr><td>Ctrl+e</td><td>C-e</td><td>Move to end of line</td></tr><tr><td>Ctrl+v</td><td>C-v</td><td>Page down</td></tr><tr><td>Option+v</td><td>M-v</td><td>Page up</td></tr></tbody></table>
+<h2>Editing</h2>
+<table><thead><tr><th>Physical Keys</th><th>Emacs Command</th><th>Action</th></tr></thead><tbody><tr><td>Ctrl+d</td><td>C-d</td><td>Delete forward character</td></tr><tr><td>Ctrl+h</td><td>C-h</td><td>Backspace / help, depending on context</td></tr><tr><td>Ctrl+k</td><td>C-k</td><td>Kill to end of line</td></tr><tr><td>Ctrl+y</td><td>C-y</td><td>Paste / yank</td></tr><tr><td>Ctrl+w</td><td>C-w</td><td>Cut selected region</td></tr><tr><td>Option+w</td><td>M-w</td><td>Copy selected region</td></tr><tr><td>Ctrl+/</td><td>C-/</td><td>Undo</td></tr></tbody></table>
+<h2>Custom macOS Binding</h2>
+<p>Your config includes:</p>
+<pre><code>
+(global-set-key (kbd &quot;M-DEL&quot;) &#x27;kill-word)
+
+</code></pre>
+<p>So this shortcut is customized:</p>
+<table><thead><tr><th>Physical Keys</th><th>Emacs Command</th><th>Action</th></tr></thead><tbody><tr><td>Option+Delete</td><td>M-DEL</td><td>Delete next word</td></tr></tbody></table>
+<h2>Selection / Mark</h2>
+<table><thead><tr><th>Physical Keys</th><th>Action</th></tr></thead><tbody><tr><td>Ctrl+Space</td><td>Set mark / begin selection</td></tr><tr><td>Ctrl+g</td><td>Cancel selection or current command</td></tr></tbody></table>
+<p>Note: macOS may use <code>Ctrl+Space</code> for input source switching. Disable or change that in:</p>
+<pre><code>
+System Settings -&gt; Keyboard -&gt; Keyboard Shortcuts -&gt; Input Sources
+
+</code></pre>
+<h2>Search</h2>
+<table><thead><tr><th>Physical Keys</th><th>Action</th></tr></thead><tbody><tr><td>Ctrl+s</td><td>Search forward</td></tr><tr><td>Ctrl+r</td><td>Search backward</td></tr><tr><td>Ctrl+g</td><td>Exit search / cancel</td></tr></tbody></table>
+<h2>File Commands</h2>
+<table><thead><tr><th>Physical Keys</th><th>Emacs Command</th><th>Action</th></tr></thead><tbody><tr><td>Ctrl+x Ctrl+f</td><td>C-x C-f</td><td>Find/open file</td></tr><tr><td>Ctrl+x Ctrl+s</td><td>C-x C-s</td><td>Save current file</td></tr><tr><td>Ctrl+x Ctrl+w</td><td>C-x C-w</td><td>Save as / write file</td></tr><tr><td>Ctrl+x s</td><td>C-x s</td><td>Save all modified buffers</td></tr><tr><td>Ctrl+x Ctrl+c</td><td>C-x C-c</td><td>Quit Emacs</td></tr></tbody></table>
+<h2>File Search / Finding Things</h2>
+<table><thead><tr><th>Physical Keys</th><th>Emacs Command</th><th>Action</th></tr></thead><tbody><tr><td>Ctrl+x Ctrl+f</td><td>C-x C-f</td><td>Find/open file by path</td></tr><tr><td>Ctrl+x d</td><td>C-x d</td><td>Open Dired directory browser</td></tr><tr><td>Ctrl+s</td><td>C-s</td><td>Search forward inside current file</td></tr><tr><td>Ctrl+r</td><td>C-r</td><td>Search backward inside current file</td></tr><tr><td>Option+x grep</td><td>M-x grep</td><td>Search text across files using grep</td></tr><tr><td>Option+x rgrep</td><td>M-x rgrep</td><td>Recursive grep through directories</td></tr><tr><td>Option+x occur</td><td>M-x occur</td><td>Show all matches in current buffer</td></tr><tr><td>Option+x find-name-dired</td><td>M-x find-name-dired</td><td>Find files by filename pattern</td></tr></tbody></table>
+<p>Examples:</p>
+<pre><code>
+M-x rgrep
+
+Search for: TODO
+
+In files: *.el
+
+Base directory: ~/.emacs.d/
+
+</code></pre>
+<pre><code>
+M-x find-name-dired
+
+Directory: ~/.emacs.d/
+
+Pattern: *.el
+
+</code></pre>
+<h2>Windows / Panes</h2>
+<table><thead><tr><th>Physical Keys</th><th>Action</th></tr></thead><tbody><tr><td>Ctrl+x 2</td><td>Split window horizontally</td></tr><tr><td>Ctrl+x 3</td><td>Split window vertically</td></tr><tr><td>Ctrl+x o</td><td>Move to next window</td></tr><tr><td>Ctrl+x 0</td><td>Close current window</td></tr><tr><td>Ctrl+x 1</td><td>Keep only current window</td></tr></tbody></table>
+<h2>Buffers</h2>
+<table><thead><tr><th>Physical Keys</th><th>Action</th></tr></thead><tbody><tr><td>Ctrl+x k</td><td>Kill current buffer</td></tr><tr><td>Ctrl+x b</td><td>Switch buffer</td></tr><tr><td>Ctrl+x Ctrl+b</td><td>List buffers</td></tr></tbody></table>
+<h2>Company Autocomplete</h2>
+<p>Your config enables:</p>
+<ul><li>`company`</li><li>`company-box`</li></ul>
+<table><thead><tr><th>Physical Keys</th><th>Action</th></tr></thead><tbody><tr><td>Option+n</td><td>Next suggestion</td></tr><tr><td>Option+p</td><td>Previous suggestion</td></tr><tr><td>Enter</td><td>Accept suggestion</td></tr><tr><td>Tab</td><td>Complete</td></tr><tr><td>Ctrl+g</td><td>Cancel popup</td></tr></tbody></table>
+<h2>Most Important Survival Keys</h2>
+<table><thead><tr><th>Keys</th><th>Meaning</th></tr></thead><tbody><tr><td>Ctrl+g</td><td>Cancel / escape</td></tr><tr><td>Ctrl+x Ctrl+s</td><td>Save file</td></tr><tr><td>Ctrl+x Ctrl+f</td><td>Open file</td></tr><tr><td>Ctrl+x o</td><td>Switch pane</td></tr><tr><td>Ctrl+y</td><td>Paste / yank</td></tr><tr><td>Ctrl+k</td><td>Cut to end of line</td></tr><tr><td>Option+f / Option+b</td><td>Move by word</td></tr><tr><td>Option+Delete</td><td>Delete next word</td></tr><tr><td>Ctrl+s</td><td>Search current file</td></tr><tr><td>M-x rgrep</td><td>Search across files</td></tr></tbody></table>
+    </div>
+  </main>
+</body>
+</html>
